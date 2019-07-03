@@ -1,1 +1,1 @@
-export declare function parseAtom(): any;
+export declare function parseAtom(opt: any): any;

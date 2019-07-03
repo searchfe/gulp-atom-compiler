@@ -4,7 +4,7 @@ const gutil = require("gulp-util");
 const through = require("through2");
 const replaceExt = require("replace-ext");
 const compiler = require("@baidu/atom-web-compiler");
-function parseAtom() {
+function parseAtom(opt) {
     return through.obj(function (file, enc, cb) {
         // 如果文件为空，不做任何操作，转入下一个操作，即下一个 .pipe()
         if (file.isNull()) {
@@ -28,7 +28,7 @@ function parseAtom() {
                         val = val.replace(/^search-ui\//, 'search-ui/v2/');
                         return `"${val}"`;
                     }
-                    return `"wiseatom/${val}"`;
+                    return `"@molecule/${val}"`;
                 },
                 compileJSComponent(val, key) {
                     // search-ui 则不做任何处理
@@ -37,18 +37,19 @@ function parseAtom() {
                         return `require("${val}")`;
                     }
                     // val: searchbox/main
-                    return `require("wiseatom/${val}")`;
+                    return `require("@molecule/${val}")`;
                 },
             });
-            file.contents = new Buffer(compiled.compiled.js);
-            file.path = replaceExt(file.path, '.js');
-            let phpContents = new Buffer(compiled.compiled.php.replace(/^\s+|\s+$/g, ''));
-            let phpPath = replaceExt(file.path, '.php');
+            if (opt.type === 'js') {
+                file.contents = new Buffer(compiled.compiled.js);
+                file.path = replaceExt(file.path, '.js');
+            }
+            else {
+                file.contents = new Buffer(compiled.compiled.php.replace(/^\s+|\s+$/g, ''));
+                file.path = replaceExt(file.path, '.php');
+            }
+            console.log(file.path);
             this.push(file);
-            this.push(new gutil.File({
-                path: phpPath,
-                contents: phpContents
-            }));
             cb();
         }
     });
