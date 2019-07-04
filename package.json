@@ -1,6 +1,6 @@
 {
   "name": "gulp-atom-paser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "gulp plugins for atom",
   "main": "dist/index.js",
   "scripts": {
