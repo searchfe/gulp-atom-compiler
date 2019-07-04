@@ -53,7 +53,6 @@ export function parseAtom(opt) {
                 file.contents = new Buffer(compiled.compiled.php.replace(/^\s+|\s+$/g, ''));
                 file.path = replaceExt(file.path, '.php');
             }
-            console.log(file.path);
             this.push(file);
             cb();
         }
