@@ -33,7 +33,7 @@ export function parseAtom(opt) {
                         val = val.replace(/^search-ui\//, 'search-ui/v2/');
                         return `"${val}"`;
                     }
-                    return `"@molecule/${val}"`;
+                    return `"molecules/${val}"`;
                 },
                 compileJSComponent(val, key) {
                     // search-ui 则不做任何处理

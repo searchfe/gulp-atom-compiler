@@ -3,6 +3,11 @@
   "version": "1.0.3",
   "description": "gulp plugins for atom",
   "main": "dist/index.js",
+  "files": [
+    "dist",
+    "*.json",
+    "*.md"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
