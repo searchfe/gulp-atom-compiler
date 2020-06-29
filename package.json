@@ -1,6 +1,6 @@
 {
   "name": "gulp-atom-parser",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "gulp plugins for atom",
   "main": "dist/index.js",
   "files": [
