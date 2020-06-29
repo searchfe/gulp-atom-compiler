@@ -1,7 +1,7 @@
 import * as gutil from 'gulp-util';
 import * as through from 'through2';
 import replaceExt = require('replace-ext');
-import compiler = require('@baidu/atom-web-compiler');
+import compiler = require('atom-web-compiler');
 
 interface opt {
     type: "js" | "php"
@@ -49,6 +49,9 @@ export function parseAtom(opt) {
             if (opt.type === 'js') {
                 file.contents = new Buffer(compiled.compiled.js);
                 file.path = replaceExt(file.path, '.js');
+            } else if (opt.type === 'css') {
+                file.contents = new Buffer(compiled.compiled.css);
+                file.path = replaceExt(file.path, '.css');
             } else {
                 file.contents = new Buffer(compiled.compiled.php.replace(/^\s+|\s+$/g, ''));
                 file.path = replaceExt(file.path, '.php');
